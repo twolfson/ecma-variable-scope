@@ -2,12 +2,33 @@
 
 AST utility to collect scope info for variables
 
+Scope detection is hard, especially when `with` exists. This utility extracts all relevant info for making decisions. This project was built as part of [`esformatter-phonetic`][], a [`esformatter`][] plugin that makes obfuscated variable names more comprehensible.
+
+[`esformatter-phonetic`]: https://github.com/twolfson/esformatter-phonetic
+[`esformatter`]: https://github.com/millermedeiros/esformatter
+
 ## Getting Started
 Install the module with: `npm install ecma-variable-scope`
 
 ```js
-var ecma_variable_scope = require('ecma-variable-scope');
-ecma_variable_scope.awesome(); // "awesome"
+// Gather an AST to analyze
+var ecmaVariableScope = require('ecma-variable-scope');
+
+// Determine the scope of a variable
+
+/*{
+  // Resolution of `!with && var || let || const || 'arguments' || catch`
+  //   If a `with` is used before a `var`, `let`, `const`, `arguments,` or `catch`
+  /    then, `'unknown'` is returned
+  declared: true,
+  topLevel: false,
+  with: false,
+  var: true,
+  let: false,
+  const: false,
+  'arguments': false
+  catch: false,
+}*/
 ```
 
 ## Documentation
