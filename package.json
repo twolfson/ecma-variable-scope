@@ -28,7 +28,9 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {},
+  "dependencies": {
+    "obj-extend": "~0.1.0"
+  },
   "devDependencies": {
     "chai": "~1.9.2",
     "esprima-fb": "~7001.1.0-dev-harmony-fb",
