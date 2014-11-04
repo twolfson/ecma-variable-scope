@@ -14,9 +14,7 @@ var testUtils = {
       var ast = rocambole.parse(content);
 
       // Find the node, collect its info, and save
-      // TODO: Use chai property resolver
       var node = pathval.get(ast, nodePath);
-      console.log(require('util').inspect(node, {depth: 1}));
       this.info = ecmaVariableScope(node);
     });
     after(function cleanup () {
@@ -32,8 +30,18 @@ describe('ecma-variable-scope', function () {
     testUtils.collectInfo(__dirname + '/test-files/props-top-level.js',
       'body[0].declarations[0].id');
 
-    it.skip('tells us the variable is top-level and nothing else', function () {
+    it('tells us the variable is top-level', function () {
+      expect(this.info).to.have.property('var', true);
+    });
 
+    it('is declared', function () {
+      expect(this.info).to.have.property('declared', true);
+    });
+
+    it('does not provide any more misinformation', function () {
+      ['arguments', 'catch', 'const', 'let', /*'topLevel', */'with'].forEach(function assertFalse (key) {
+        expect(this.info).to.have.property(key, false);
+      }, this);
     });
   });
 });
