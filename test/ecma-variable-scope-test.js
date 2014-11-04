@@ -15,7 +15,7 @@ var testUtils = {
 
       // Find the node, collect its info, and save
       // TODO: Use chai property resolver
-      var node = pathval.get(ast, nodePath);;
+      var node = pathval.get(ast, nodePath);
       console.log(node.prev);
       this.info = ecmaVariableScope(node);
     });
