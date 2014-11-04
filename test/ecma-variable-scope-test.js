@@ -1,8 +1,8 @@
 // Load in dependencies
 var fs = require('fs');
-var esprima = require('esprima-fb');
 var expect = require('chai').expect;
 var pathval = require('pathval');
+var rocambole = require('rocambole');
 var ecmaVariableScope = require('../');
 
 // Define test utilities
@@ -11,7 +11,7 @@ var testUtils = {
     before(function collectScopeFn () {
       // Load in the file and parse its AST
       var content = fs.readFileSync(filepath, 'utf8');
-      var ast = esprima.parse(content);
+      var ast = rocambole.parse(content);
 
       // Find the node, collect its info, and save
       // TODO: Use chai property resolver
