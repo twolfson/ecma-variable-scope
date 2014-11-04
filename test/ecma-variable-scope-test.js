@@ -2,6 +2,7 @@
 var fs = require('fs');
 var esprima = require('esprima');
 var expect = require('chai').expect;
+var pathval = require('pathval');
 var ecmaVariableScope = require('../');
 
 // Define test utilities
@@ -14,8 +15,8 @@ var testUtils = {
 
       // Find the node, collect its info, and save
       // TODO: Use chai property resolver
-      var node = ast;
-      console.log(ast);
+      var node = pathval.get(ast, nodePath);;
+      console.log(node.prev);
       this.info = ecmaVariableScope(node);
     });
     after(function cleanup () {
@@ -29,7 +30,7 @@ var testUtils = {
 describe('ecma-variable-scope', function () {
   describe('gathering info on a top-level variable', function () {
     testUtils.collectInfo(__dirname + '/test-files/props-top-level.js',
-      'somewhere...');
+      'body[0].declarations[0].id');
 
     it.skip('tells us the variable is top-level and nothing else', function () {
 
