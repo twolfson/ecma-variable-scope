@@ -1,6 +1,6 @@
 // Load in dependencies
 var fs = require('fs');
-var esprima = require('esprima');
+var esprima = require('esprima-fb');
 var expect = require('chai').expect;
 var pathval = require('pathval');
 var ecmaVariableScope = require('../');
@@ -16,7 +16,7 @@ var testUtils = {
       // Find the node, collect its info, and save
       // TODO: Use chai property resolver
       var node = pathval.get(ast, nodePath);
-      console.log(node.prev);
+      console.log(node);
       this.info = ecmaVariableScope(node);
     });
     after(function cleanup () {
