@@ -29,6 +29,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "estraverse": "~1.7.0",
     "obj-extend": "~0.1.0"
   },
   "devDependencies": {
