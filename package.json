@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "chai": "~1.9.2",
+    "ecma-scopes": "~1.1.0",
     "esprima-fb": "~7001.1.0-dev-harmony-fb",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
