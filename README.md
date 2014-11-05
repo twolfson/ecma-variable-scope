@@ -21,8 +21,8 @@ var ecmaVariableScope = require('ecma-variable-scope');
 /*{
   // Resolution of `!with && var || let || const || function || 'arguments' || catch`
   //   If a `with` is used before a `var`, `let`, `const`, `function`, `arguments,` or `catch`
-  //   then, `exports.DECLARED_UNKNOWN` is returned
-  //   For your sanity, we provide `exports.DECLARED_YES` (true) and `exports.DECLARED_NO` (false)
+  //   then, `exports.UNKNOWN` is returned
+  //   For your sanity, we provide `exports.YES` (true) and `exports.NO` (false)
   declared: true,
   topLevel: false,
   with: false,
