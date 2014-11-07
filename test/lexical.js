@@ -45,22 +45,19 @@ describe('ecma-variable-scope', function () {
       }
     });
 
-    it('marks the function name as lexically scoped', function () {
+    it('marks the function name as lexically scoped to the outer scope', function () {
       // {Program} (body) -> {fn} ([0]) -> hello (id)
       var identifier = this.ast.body[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      // TODO: Come back to me
+      // expect(identifier.scope.node).to.equal(this.ast.body);
     });
 
-    it.skip('marks the function arguments as lexically scoped', function () {
-
-    });
-
-    it.skip('scopes the function name to the outer scope', function () {
-
-    });
-
-    it.skip('scopes the function parameters to the function', function () {
-
+    it('marks the function parameters as lexically scoped to the function', function () {
+      // {Program} (body) -> {fn} ([0]) -> world (params[0])
+      var identifier = this.ast.body[0].params[0];
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      expect(identifier.scope.node).to.equal(this.ast.body[0]);
     });
   });
 

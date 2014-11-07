@@ -39,7 +39,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-watch": "~0.4.0",
-    "mocha": "~1.11.0"
+    "mocha": "~2.0.1"
   },
   "keywords": [
     "ecma",
