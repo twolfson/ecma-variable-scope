@@ -1,3 +1,5 @@
+/* jshint -W085 */
+// DEV: The above directive ignores `with` errors
 // Load in dependencies
 var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
