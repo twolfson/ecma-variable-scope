@@ -29,20 +29,17 @@
     "test": "mocha"
   },
   "dependencies": {
-    "estraverse": "~1.7.0",
-    "obj-extend": "~0.1.0"
+    "ecma-scopes": "~1.1.0",
+    "estraverse": "~1.7.0"
   },
   "devDependencies": {
     "chai": "~1.9.2",
-    "ecma-scopes": "~1.1.0",
     "esprima-fb": "~7001.1.0-dev-harmony-fb",
     "function-to-string": "~0.2.0",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-watch": "~0.4.0",
-    "mocha": "~1.11.0",
-    "pathval": "~0.1.1",
-    "rocambole": "~0.3.6"
+    "mocha": "~1.11.0"
   },
   "keywords": [
     "ecma",
