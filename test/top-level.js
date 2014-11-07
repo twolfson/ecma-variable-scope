@@ -13,10 +13,8 @@ var scriptUtils = require('./utils/script');
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a top level var', function () {
     scriptUtils.interpretFnAst(function topLevelFn () {
-      // Define variable at top level
       var hello;
       function hai() {
-        // Reference again out of top level context
         hello = true;
       }
     });
