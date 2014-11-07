@@ -56,6 +56,12 @@ describe('ecma-variable-scope', function () {
       // {Program} (ast) -> {fn} (body[0]) -> world (params[0])
       var identifier = this.ast.body[0].params[0];
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      // TODO: Issue here is we are setting the scope to `Program` instead of our function
+      // TODO: This is because `nearestScope` seems to be `Prorgram`
+        // TODO: Although, recheck it for sanity
+      // TODO: To resolve this (in my half awake state), I propose adding cases to the first loop if we are running into trouble at these boundaries
+        // TODO: We will definitely have a problem by solving this that the `fn.name` test above will break
+        // TODO: That needs to have a conditional to break it out to the higher scope
       // console.log(identifier.scope.node);
       // expect(identifier.scope.node).to.equal(this.ast.body[0]);
     });
