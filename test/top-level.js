@@ -4,6 +4,12 @@ var expect = require('chai').expect;
 var fnToString = require('function-to-string');
 var ecmaVariableScope = require('../');
 
+// TODO: Test declared/undeclared
+// TODO: Test with/without
+// TODO: Test each of the covered cases in `lib/`
+// TODO: Strongly consider using a code coverage lib
+  // Especially a critical one like steamshovel
+
 // Define test utilities
 var testUtils = {
   interpretAst: function (fn) {
@@ -34,16 +40,27 @@ describe('ecma-variable-scope', function () {
     it('marks the initialization as top level', function () {
       // {Program} (body) -> {var} ([0]) -> hello (declarations[0].id)
       var identifier = this.ast.body[0].declarations[0].id;
-      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
       expect(identifier.scopeInfo).to.have.property('topLevel', true);
     });
 
-    it('marks the lexically scoped reference as top level', function () {
-      // {Program} (body) -> {fn} (hai) -> hello (declarations[0].id)
-      var identifier = this.ast.body[0].declarations[0].id;
-
+    it('marks the top level variable within a funtion as top level', function () {
+      // {Program} (body) -> {fn body} ([1].body.body) -> hello ([0].expression.left)
+      var identifier = this.ast.body[1].body.body[0].expression.left;
+      expect(identifier.scopeInfo).to.have.property('topLevel', true);
     });
   });
 
-  // describe('mark
+  describe('marking up an AST without a top level var', function () {
+    testUtils.interpretAst(function nonTopLevelFn () {
+      function hai() {
+        var hello = true;
+      }
+    });
+
+    it('marks the lexically scoped variable as not top level', function () {
+      // {Program} (body) -> {fn body} ([0].body.body) -> {var} [0] -> hello (declarations[0].id)
+      var identifier = this.ast.body[0].body.body[0].declarations[0].id;
+      expect(identifier.scopeInfo).to.have.property('topLevel', false);
+    });
+  });
 });
