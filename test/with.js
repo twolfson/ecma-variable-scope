@@ -7,7 +7,7 @@ var scriptUtils = require('./utils/script');
 // Run our tests
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a var inside referenced through a `with`', function () {
-    scriptUtils.interpretFnAst(function topLevelFn () {
+    scriptUtils.interpretFnAst(function () {
       var hello = 'world';
       var obj = {hello: 'moon'};
       with (obj) {

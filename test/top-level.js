@@ -12,7 +12,7 @@ var scriptUtils = require('./utils/script');
 // Run our tests
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a top level var', function () {
-    scriptUtils.interpretFnAst(function topLevelFn () {
+    scriptUtils.interpretFnAst(function () {
       var hello;
       function hai() {
         hello = true;
@@ -33,7 +33,7 @@ describe('ecma-variable-scope', function () {
   });
 
   describe('marking up an AST without a top level var', function () {
-    scriptUtils.interpretFnAst(function nonTopLevelFn () {
+    scriptUtils.interpretFnAst(function () {
       function hai() {
         var hello = true;
       }
