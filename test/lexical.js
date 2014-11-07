@@ -16,6 +16,10 @@ describe('ecma-variable-scope', function () {
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
+
+    it.skip('scopes the variable to the top level', function () {
+
+    });
   });
 
   describe('marking up an AST with a `const`', function () {
@@ -28,6 +32,10 @@ describe('ecma-variable-scope', function () {
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
+
+    it.skip('scopes the variable to the top level', function () {
+
+    });
   });
 
   describe.only('marking up an AST with a function declaration', function () {
@@ -37,11 +45,21 @@ describe('ecma-variable-scope', function () {
       }
     });
 
-    it.skip('marks the function name as lexically scoped', function () {
-
+    it('marks the function name as lexically scoped', function () {
+      // {Program} (body) -> {fn} ([0]) -> hello (id)
+      var identifier = this.ast.body[0].id;
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
 
     it.skip('marks the function arguments as lexically scoped', function () {
+
+    });
+
+    it.skip('scopes the function name to the outer scope', function () {
+
+    });
+
+    it.skip('scopes the function parameters to the function', function () {
 
     });
   });
