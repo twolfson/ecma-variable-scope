@@ -1,5 +1,5 @@
-function hello() {
-  with (hai) {
+// function hello() {
+//   with (hai) {
     var a;
-  }
-}
+//   }
+// }
