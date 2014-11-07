@@ -7,6 +7,7 @@ var ecmaVariableScope = require('../');
 // TODO: Test declared/undeclared
 // TODO: Test with/without
 // TODO: Test each of the covered cases in `lib/`
+  // TODO: Probably break this into `lexical` and `block` tests
 // TODO: Strongly consider using a code coverage lib
   // Especially a critical one like steamshovel
 
