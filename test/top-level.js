@@ -2,13 +2,6 @@
 var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
 
-// TODO: Test declared/undeclared
-// TODO: Test with/without
-// TODO: Test each of the covered cases in `lib/`
-  // TODO: Probably break this into `lexical` and `block` tests
-// TODO: Strongly consider using a code coverage lib
-  // Especially a critical one like steamshovel
-
 // Run our tests
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a top level var', function () {

@@ -4,6 +4,14 @@ AST utility to collect scope info for variables
 
 // TODO: When done, update name in `ecma-scopes' README`
 
+// TODO: Test declared/undeclared
+// TODO: Test each of the covered cases in `lib/`
+  // TODO: Probably break this into `lexical` and `block` tests
+// TODO: Strongly consider using a code coverage lib
+  // Especially a critical one like steamshovel
+// TODO: Test `nearestScope`, `declared`, and anything else (e.g. `scope.parent, children`)
+  // Although, this locks in our API when all we wanted was `scope` on the identifiers
+
 Scope detection is hard, especially when `with` exists. This utility extracts all relevant info for making decisions. This project was built as part of [`esformatter-phonetic`][], a [`esformatter`][] plugin that makes obfuscated variable names more comprehensible.
 
 [`esformatter-phonetic`]: https://github.com/twolfson/esformatter-phonetic
