@@ -30,7 +30,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe('marking up an AST with a function declaration', function () {
+  describe.only('marking up an AST with a function declaration', function () {
     scriptUtils.interpretFnAst(function () {
       function hello(world) {
         // Code goes here
