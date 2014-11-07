@@ -16,13 +16,13 @@ describe('ecma-variable-scope', function () {
     });
 
     it('marks the initialization without a `with`', function () {
-      // {Program} (body) -> {var} ([0]) -> hello (declarations[0].id)
+      // {Program} (ast) -> {var} (body[0]) -> hello (declarations[0].id)
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('insideWith', false);
     });
 
     it('marks the inner `with` variable as with a `with`', function () {
-      // {Program} (body) -> {with content} ([2].body.body) -> `hello` ([0].expression['arguments'][0])
+      // {Program} (ast) -> {with content} (body[2].body.body) -> `hello` ([0].expression['arguments'][0])
       var identifier = this.ast.body[2].body.body[0].expression['arguments'][0];
       expect(identifier.scopeInfo).to.have.property('insideWith', true);
     });

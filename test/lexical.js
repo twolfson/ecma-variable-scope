@@ -12,7 +12,7 @@ describe('ecma-variable-scope', function () {
     });
 
     it('is considered `lexical`', function () {
-      // {Program} (body) -> {var} ([0]) -> hello (declarations[0].id)
+      // {Program} (ast) -> {var} (body[0]) -> hello (declarations[0].id)
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
@@ -28,7 +28,7 @@ describe('ecma-variable-scope', function () {
     });
 
     it('is considered `lexical`', function () {
-      // {Program} (body) -> {var} ([0]) -> hello (declarations[0].id)
+      // {Program} (ast) -> {var} (body[0]) -> hello (declarations[0].id)
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
@@ -46,15 +46,14 @@ describe('ecma-variable-scope', function () {
     });
 
     it('marks the function name as lexically scoped to the outer scope', function () {
-      // {Program} (body) -> {fn} ([0]) -> hello (id)
+      // {Program} (ast) -> {fn} (body[0]) -> hello (id)
       var identifier = this.ast.body[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
-      // TODO: Come back to me
-      // expect(identifier.scope.node).to.equal(this.ast.body);
+      expect(identifier.scope.node).to.equal(this.ast);
     });
 
-    it('marks the function parameters as lexically scoped to the function', function () {
-      // {Program} (body) -> {fn} ([0]) -> world (params[0])
+    it.skip('marks the function parameters as lexically scoped to the function', function () {
+      // {Program} (ast) -> {fn} (body[0]) -> world (params[0])
       var identifier = this.ast.body[0].params[0];
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
       // console.log(identifier.scope.node);
