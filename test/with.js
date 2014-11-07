@@ -20,9 +20,9 @@ describe('ecma-variable-scope', function () {
     });
 
     it('marks the inner `with` variable as with a `with`', function () {
-      // {Program} (body) -> [2]
-      // var identifier = this.ast.body[1].body.body[0].expression.left;
-      // expect(identifier.scopeInfo).to.have.property('topLevel', true);
+      // {Program} (body) -> {with content} ([2].body.body) -> `hello` ([0].expression['arguments'][0])
+      var identifier = this.ast.body[2].body.body[0].expression['arguments'][0];
+      expect(identifier.scopeInfo).to.have.property('insideWith', true);
     });
   });
 });
