@@ -86,7 +86,9 @@ console.log('hello');
 ```
 
 #### `scope`
-Object containing information
+Object containing information about the outermost scope a variable can be accessed from:
+
+- type `String` -
 
 It is possible for an `Identifier` to have `scopeInfo` but not `scope`. For example, `console` is defined as a global outside of a script context. We cannot determine if it is defined or not and make the decision to leave it as `undefined`.
 
