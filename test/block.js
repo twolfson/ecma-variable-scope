@@ -145,10 +145,10 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it.skip('scopes the variable to the comprehension block', function () {
-      var catchClause = this.ast.body[0].handlers[0];
-      var identifier = catchClause.param;
-      expect(identifier.scope.node).to.equal(catchClause);
+    it('scopes the variable to the comprehension block', function () {
+      var comprehensionBlock = this.ast.body[0].declarations[0];
+      var identifier = comprehensionBlock.init.blocks[0].left;
+      expect(identifier.scope.node).to.equal(comprehensionBlock);
     });
   });
 });
