@@ -62,7 +62,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with function expression', function () {
+  describe('marking up an AST with function expression', function () {
     scriptUtils.interpretFnAst(function () {
       [].map(function hello (world) {
         // Code goes here
