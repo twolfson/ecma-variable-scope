@@ -110,7 +110,7 @@ Object containing information about the variable itself:
     - `true` occurs when we know it has a type (e.g. `lexical`, `block`) **and** there has been no `with` between us and the `scope`
     - `false` is when there is no `with` and the type is `undeclared`
     - `unknown` is any time a `with` exists before the containing scope (or lack there of)
-    - We provide `exports.SCOPE_INFO_DECLARE.YES`, `exports.SCOPE_INFO_DECLARE.NO`, and `exports.SCOPE_INFO_DECLARE.UNKNOWN` respectively.
+    - We provide `exports.SCOPE_INFO_DECLARED.YES`, `exports.SCOPE_INFO_DECLARED.NO`, and `exports.SCOPE_INFO_DECLARED.UNKNOWN` respectively.
 - insideWith `Boolean` - Indicator of whether a variable has a `with` between its declaration and its containing scope
     - `true` if there was a `with`,`false` if there was not one
     - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` and  `exports.SCOPE_INFO_INSIDE_WITH.NO` respectively.
