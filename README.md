@@ -90,7 +90,7 @@ Object containing information about the outermost scope a variable can be access
 
 - type `String` - Variant of scope that a variable is in
     - This can be `lexical` or `block`. When we traverse `scope.parent`, we can run into `with` but this is not directly found from `node.scope`.
-    - We make these values available via `exports.SCOPE_TYPES.LEXICAL`,`exports.SCOPE_TYPES.WITH`, and`exports.SCOPE_TYPES.BLOCK`.
+    - We make these values available via `exports.SCOPE_TYPES.LEXICAL`, `exports.SCOPE_TYPES.WITH`, and`exports.SCOPE_TYPES.BLOCK`.
 - node `Object<Node>` - AST node that corresponds to the top of scope
     - For example in `function a() { var b; }`, `b.scope.node === a`
 - parent `Object<Scope>|undefined` - Next scope containing the current `scope`. This can be any other type (e.g. `lexical`, `block`, `with`).
