@@ -64,7 +64,7 @@ describe('ecma-variable-scope', function () {
       expect(identifier).to.not.have.property('scopeInfo');
     });
 
-    it.only('does not mark the `continue` identifier with a `scope`', function () {
+    it('does not mark the `continue` identifier with a `scope`', function () {
       // {Program} (ast) -> {labeled statement} (body[0]) -> {for} (body)
       //  -> {if} (body.body[0]) -> {continue} (alternate.body[0]) -> loop1 {label}
       var identifier = this.ast.body[0].body.body.body[0].alternate.body[0].label;
@@ -74,9 +74,6 @@ describe('ecma-variable-scope', function () {
   });
 
   // Double check all of these
-  // label
-  // break
-  // continue
   // objectpattern key
 });
 
