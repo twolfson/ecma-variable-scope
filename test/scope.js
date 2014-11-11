@@ -80,8 +80,20 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  // Double check all of these
-  // objectpattern key
+  describe.only('marking an object pattern', function () {
+    scriptUtils.interpretStrAst([
+      'var hello = {world: true};',
+      'var {world} = hello;'
+    ].join('\n'));
+
+    it('marks the identifier keys as variables', function () {
+      // {Program} (ast) -> {var} (body[1]) -> {object pattern} (declarations[0].id)
+      //  -> world (properties[0].id)
+      var identifier = this.ast.body[1].declarations[0].id.properties[0].key;
+      expect(identifier).to.have.property('scope');
+      expect(identifier).to.have.property('scopeInfo');
+    });
+  });
 });
 
 // Edge cases
