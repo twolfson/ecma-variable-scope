@@ -5,8 +5,6 @@ AST utility to collect scope info for variables
 // TODO: When done, update name in `ecma-scopes' README`
 
 // TODO: Test declared/undeclared
-// TODO: Test each of the covered cases in `lib/`
-  // TODO: Probably break this into `lexical` and `block` tests
 // TODO: Strongly consider using a code coverage lib
   // Especially a critical one like steamshovel
 // TODO: Test `nearestScope`, `declared`, and anything else (e.g. `scope.parent, children`)
