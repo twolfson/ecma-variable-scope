@@ -29,7 +29,7 @@
     "test": "grunt jshint && mocha --harmony"
   },
   "dependencies": {
-    "ecma-scopes": "~1.1.0",
+    "ecma-scopes": "~2.0.0",
     "estraverse": "~1.7.0"
   },
   "devDependencies": {

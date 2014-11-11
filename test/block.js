@@ -133,7 +133,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with a comprehension block', function () {
+  describe.only('marking up an AST with a comprehension expression', function () {
     scriptUtils.interpretStrAst([
       'var a = [1 for (hello of [\'world\'])];'
     ].join('\n'));
@@ -145,9 +145,9 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it('scopes the variable to the comprehension block', function () {
-      var comprehensionBlock = this.ast.body[0].declarations[0];
-      var identifier = comprehensionBlock.init.blocks[0].left;
+    it('scopes the variable to the comprehension expression', function () {
+      var comprehensionBlock = this.ast.body[0].declarations[0].init;
+      var identifier = comprehensionBlock.blocks[0].left;
       expect(identifier.scope.node).to.equal(comprehensionBlock);
     });
   });
