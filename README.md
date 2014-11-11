@@ -80,9 +80,15 @@ function hello(world) {
   var moon;
   hello(world, moon);
 }
+
+// `log` is an `Identifier` but will not have `scope` and `scopeInfo`
+console.log('hello');
 ```
 
 #### `scope`
+Object containing information
+
+It is possible for an `Identifier` to have `scopeInfo` but not `scope`. For example, `console` is defined as a global outside of a script context. We cannot determine if it is defined or not and make the decision to leave it as `undefined`.
 
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
