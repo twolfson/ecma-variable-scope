@@ -119,11 +119,13 @@ Object containing information about the variable itself:
     - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` (`true)` and  `exports.SCOPE_INFO_INSIDE_WITH.NO` (`false`).
 - toplevel `Boolean` - Indicator of whether a variable was declared in the `Program` scope or not
     - `true` if it was, `false` if it was not
-    - We provide `exports.SCOPE_INFO_TPO_LEVEL.YES` and  `exports.SCOPE_INFO_TPO_LEVEL.NO` respectively.
+    - For example in `function a() { var b; }`, we have `a.scopeInfo.topLevel === true` and `b.scopeInfo.topLevel === false`.
+    - We provide `exports.SCOPE_INFO_TOP_LEVEL.YES` (`true`) and  `exports.SCOPE_INFO_TOP_LEVEL.NO` (`false`).
 - type `String` - Reference to the type of scope given to a variable
     - This can vary from the containing scope (e.g. a `let` is scoped to a `function`; `block` to `lexical`)
     - This can be `lexical` (e.g. `function`), `block` (e.g. `for` loop), or `undeclared` (not declared in any containing scope)
-    - We provide `exports.SCOPE_INFO_TYPES.LEXICAL`, `exports.SCOPE_INFO_TYPES.BLOCK`, and `exports.SCOPE_INFO_TYPES.UNDECLARED` respectively.
+    - For example in `function a() { let b; }`, we have `a.scopeInfo.type === 'lexical'` and `b.scopeInfo.type === 'block'`.
+    - We provide `exports.SCOPE_INFO_TYPES.LEXICAL` (`'lexical'`), `exports.SCOPE_INFO_TYPES.BLOCK` (`'block'`), and `exports.SCOPE_INFO_TYPES.UNDECLARED` (`'undeclared'`).
 
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
