@@ -26,7 +26,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "cover": "istanbul cover _mocha -- --harmony",
+    "cover": "istanbul cover _mocha",
     "test": "grunt jshint && mocha --harmony"
   },
   "dependencies": {
@@ -41,7 +41,7 @@
     "grunt-cli": "~0.1.13",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-watch": "~0.4.0",
-    "istanbul": "~0.3.2",
+    "istanbul-harmony": "~0.3.0",
     "mocha": "~2.0.1"
   },
   "keywords": [
