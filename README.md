@@ -6,8 +6,6 @@ AST utility to collect scope info for variables
 
 // TODO: Strongly consider using a code coverage lib
   // Especially a critical one like steamshovel
-// TODO: Test moar (e.g. `scope.parent, children`)
-  // TODO: Mark anything except for `scope` on a `node` with an `_` prefix
 
 Scope detection is hard, especially when `with` exists. This utility extracts all relevant info for making decisions. This project was built as part of [`esformatter-phonetic`][], a [`esformatter`][] plugin that makes obfuscated variable names more comprehensible.
 
