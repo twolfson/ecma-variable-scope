@@ -88,9 +88,22 @@ console.log('hello');
 #### `scope`
 Object containing information about the outermost scope a variable can be accessed from:
 
-- type `String` -
+- type `String` - Variant of scope that a variable is in
+    - This can be `lexical` or `block`. When we traverse `scope.parent`, we can run into `with` but this is not directly found from `node.scope`.
+    - We make these values available via `exports.SCOPE_TYPES.LEXICAL`,`exports.SCOPE_TYPES.WITH`, and`exports.SCOPE_TYPES.BLOCK`.
+- node `Object<Node>` - AST node that corresponds to the top of scope
+    - For example in `function a() { var b; }`, `b.scope.node === a`
+- parent `Object<Scope>|undefined` - Next scope containing the current `scope`. This can be any other type (e.g. `lexical`, `block`, `with`).
+- identifiers `Object` - Map from identifier name to `Identifier` reference of variables declared within this scope
+    - For example in `function a() { var b; }`, `a.scope.identifiers === {b: b's Identifier}`
+    - This will not contain identifiers within child scopes
+- children `Scope[]` - Array of child scopes contained by this scope
+    - For example in `function a() { }`, `Program's scope` will contain `a.scope`
 
 It is possible for an `Identifier` to have `scopeInfo` but not `scope`. For example, `console` is defined as a global outside of a script context. We cannot determine if it is defined or not and make the decision to leave it as `undefined`.
+
+#### `scopeInfo`
+
 
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
