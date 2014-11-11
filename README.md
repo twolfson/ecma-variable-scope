@@ -107,7 +107,7 @@ Object containing information about the variable itself:
 
 - declared `Boolean|String` - Indicator of whether the variable was declared by any means or if it cannot be resolved
     - This can be `true`, `false`, or `unknown`
-    - `true` occurs when we know it has a type (e.g. `lexical`, `block`) **and**there has been no `with` between us and the `scope`
+    - `true` occurs when we know it has a type (e.g. `lexical`, `block`) **and** there has been no `with` between us and the `scope`
     - `false` is when there is no `with` and the type is `undeclared`
     - `unknown` is any time a `with` exists before the containing scope (or lack there of)
     - We provide `exports.SCOPE_INFO_DECLARE.YES`, `exports.SCOPE_INFO_DECLARE.NO`, and `exports.SCOPE_INFO_DECLARE.UNKNOWN` respectively.
