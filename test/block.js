@@ -158,5 +158,27 @@ describe('ecma-variable-scope', function () {
   });
 
   // TODO: Test multiple catches and a finally
-  // TODO: Can a catch not have a parameter or have `Error error`?
+  describe('multiple `catch` clauses and a finally', function () {
+    scriptUtils.interpretFnAst(function () {
+      try {
+        // Throw an error
+      } catch (hello) {
+        // Handle error
+      } catch (world) {
+        // Handle error
+      }
+    });
+
+    it('resolves the first catch variable to the first', function () {
+      // {Program} (ast) -> {try} (body[0]) -> {catch} (handlers[0]) -> hello (param)
+      var catchClause = this.ast.body[0].handlers[0];
+      var identifier = catchClause.param;
+      expect(identifier.scopeInfo).to.have.property('type', 'block');
+      expect(identifier.scope.node).to.equal(catchClause);
+    });
+
+    it('resolves the second catch variable to the second', function () {
+
+    });
+  });
 });
