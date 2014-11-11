@@ -76,11 +76,12 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scope.node).to.equal(this.ast);
     });
 
-    it.skip('marks the function parameters as lexically scoped to the function', function () {
-      // {Program} (ast) -> {fn} (body[0]) -> world (params[0])
-      var identifier = this.ast.body[0].params[0];
+    it('marks the function parameters as lexically scoped to the function', function () {
+      // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
+      var fn = this.ast.body[0].expression.arguments[0];
+      var identifier = fn.params[0];
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
-      expect(identifier.scope.node).to.equal(this.ast.body[0]);
+      expect(identifier.scope.node).to.equal(fn);
     });
   });
 
