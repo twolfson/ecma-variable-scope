@@ -24,6 +24,31 @@ describe('ecma-variable-scope', function () {
   });
 });
 
+// Intermediate tests
+describe('ecma-variable-scope', function () {
+  describe.only('marking up an AST with a block statement', function () {
+    scriptUtils.interpretFnAst(function () {
+      'use strict';
+      if (true) {
+        let hello = 'world';
+      }
+    });
+
+    it('is considered `block`', function () {
+      // {Program} (ast) -> {if} (body[1]) -> {block} (consequent) -> {let} (body[0])
+      //   -> hello (declarations[0].id)
+      var identifier = this.ast.body[1].consequent.body[0].declarations[0].id;
+      expect(identifier.scopeInfo).to.have.property('type', 'block');
+    });
+
+    it('scopes the variable to the block statement', function () {
+      var block = this.ast.body[1].consequent;
+      var identifier = block.body[0].declarations[0].id;
+      expect(identifier.scope.node).to.equal(block);
+    });
+  });
+});
+
 // Edge cases
 describe('ecma-variable-scope', function () {
   // TODO: Test me
