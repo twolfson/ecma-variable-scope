@@ -126,10 +126,10 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it.skip('scopes the variable to the `catch` claus', function () {
-      var forInLoop = this.ast.body[1];
-      var identifier = forInLoop.left.declarations[0].id;
-      expect(identifier.scope.node).to.equal(forInLoop);
+    it('scopes the variable to the `catch` claus', function () {
+      var catchClause = this.ast.body[0].handlers[0];
+      var identifier = catchClause.param;
+      expect(identifier.scope.node).to.equal(catchClause);
     });
   });
 });
@@ -158,4 +158,5 @@ describe('ecma-variable-scope', function () {
   });
 
   // TODO: Test multiple catches and a finally
+  // TODO: Can a catch not have a parameter or have `Error error`?
 });
