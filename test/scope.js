@@ -55,7 +55,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with a top level scope', function () {
+  describe('marking up an AST with a top level scope', function () {
     scriptUtils.interpretFnAst(function () {
       var hello = 'world';
     });
@@ -74,5 +74,30 @@ describe('ecma-variable-scope', function () {
       expect(this.scope).to.not.have.property('parent');
     });
   });
-    // TODO: scopeInfo.type = `undeclared` and `scope` === undefined
+
+  describe.only('marking up an AST with an undeclared variable', function () {
+    scriptUtils.interpretFnAst(function () {
+      console.log('hello');
+    });
+
+    before(function grabScope () {
+      // {Program} (ast) -> {console.log} (body[0]) -> console {expression.callee.object}
+      this.identifier = this.ast.body[0].expression.callee.object;
+      this.scopeInfo = this.identifier.scopeInfo;
+      this.scope = this.identifier.scope;
+    });
+    after(function cleanup () {
+      delete this.identifier;
+      delete this.scopeInfo;
+      delete this.scope;
+    });
+
+    it('has an `undeclared` as its `scope` type', function () {
+      expect(this.scopeInfo).to.have.property('type', 'undeclared');
+    });
+
+    it('does not have a `scope`', function () {
+      expect(this.identifier).to.not.have.property('scope');
+    });
+  });
 });
