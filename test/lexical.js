@@ -62,7 +62,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe('marking up an AST with function expression', function () {
+  describe('marking up an AST with a function expression', function () {
     scriptUtils.interpretFnAst(function () {
       [].map(function hello (world) {
         // Code goes here
@@ -94,6 +94,21 @@ describe('ecma-variable-scope', function () {
 
     it('does not cause errors', function () {
       // Errors would throw in `before`
+    });
+  });
+
+  describe('marking up an AST with an arrow expression', function () {
+    // DEV: JSHint doesn't like ES6 too much =(
+    scriptUtils.interpretStrAst([
+      '[].map((arrowParam) => 1);'
+    ].join('\n'));
+
+    it('marks the function parameters as lexically scoped to the function', function () {
+      // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
+      var fn = this.ast.body[0].expression.arguments[0];
+      var identifier = fn.params[0];
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      expect(identifier.scope.node).to.equal(fn);
     });
   });
 });
