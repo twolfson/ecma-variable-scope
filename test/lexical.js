@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
 
 // Run our tests
+// Basic tests
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a `var`', function () {
     scriptUtils.interpretFnAst(function () {
@@ -39,7 +40,10 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scope.node).to.equal(this.ast);
     });
   });
+});
 
+// Intermediate tests
+describe('ecma-variable-scope', function () {
   describe('marking up an AST with a function declaration', function () {
     scriptUtils.interpretFnAst(function () {
       function hello(world) {
@@ -80,20 +84,9 @@ describe('ecma-variable-scope', function () {
       // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
       var fn = this.ast.body[0].expression.arguments[0];
       var identifier = fn.params[0];
+      console.log(fn);
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
       expect(identifier.scope.node).to.equal(fn);
-    });
-  });
-
-  describe('marking up an AST with an unnamed function expression', function () {
-    scriptUtils.interpretFnAst(function () {
-      [].map(function (world) {
-        // Code goes here
-      });
-    });
-
-    it('does not cause errors', function () {
-      // Errors would throw in `before`
     });
   });
 
@@ -107,6 +100,39 @@ describe('ecma-variable-scope', function () {
       // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
       var fn = this.ast.body[0].expression.arguments[0];
       var identifier = fn.params[0];
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      expect(identifier.scope.node).to.equal(fn);
+    });
+  });
+});
+
+// Edge cases
+describe('ecma-variable-scope', function () {
+  describe('marking up an AST with an unnamed function expression', function () {
+    scriptUtils.interpretFnAst(function () {
+      [].map(function (world) {
+        // Code goes here
+      });
+    });
+
+    it('does not cause errors', function () {
+      // Errors would throw in `before`
+    });
+  });
+
+  // DEV: It looks like our flavor of esprima doesn't yet support rest arguments
+  // http://ariya.ofilabs.com/2013/03/es6-and-rest-parameter.html
+  describe.skip('marking up an AST with an function expression with a `rest` parameter', function () {
+    scriptUtils.interpretStrAst([
+      'function hello(world, ...remainder) {',
+        '// Code goes here',
+      '});'
+    ].join('\n'));
+
+    it('marks the `rest` parameters as lexically scoped to the function', function () {
+      // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
+      var fn = this.ast.body[0].expression.arguments[0];
+      var identifier = fn.params[1];
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
       expect(identifier.scope.node).to.equal(fn);
     });
