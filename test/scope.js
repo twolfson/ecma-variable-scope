@@ -75,7 +75,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with an undeclared variable', function () {
+  describe('marking up an AST with an undeclared variable', function () {
     scriptUtils.interpretFnAst(function () {
       console.log('hello');
     });
