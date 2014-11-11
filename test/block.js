@@ -126,7 +126,26 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it('scopes the variable to the `catch` claus', function () {
+    it('scopes the variable to the `catch` clause', function () {
+      var catchClause = this.ast.body[0].handlers[0];
+      var identifier = catchClause.param;
+      expect(identifier.scope.node).to.equal(catchClause);
+    });
+  });
+
+  describe.only('marking up an AST with a comprehension block', function () {
+    scriptUtils.interpretStrAst([
+      'var a = [1 for (hello of [\'world\'])];'
+    ].join('\n'));
+
+    it('a parameter is considered `block` scoped', function () {
+      // {Program} (ast) -> {var} (body[0]) -> `comprehension` (declarations[0].init)
+      //  -> {(hello of ...)} (blocks[0]) -> hello (left)
+      var identifier = this.ast.body[0].declarations[0].init.blocks[0].left;
+      expect(identifier.scopeInfo).to.have.property('type', 'block');
+    });
+
+    it.skip('scopes the variable to the comprehension block', function () {
       var catchClause = this.ast.body[0].handlers[0];
       var identifier = catchClause.param;
       expect(identifier.scope.node).to.equal(catchClause);
