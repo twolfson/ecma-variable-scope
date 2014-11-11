@@ -59,7 +59,38 @@ ast.body[0].body.body[0].expression.callee.object;
 ```
 
 ## Documentation
-_(Coming soon)_
+`ecma-variable-scope` exports `ecmaVariableScope` as its `module.exports`.
+
+### `ecmaVariableScope(ast)`
+Walk an abstract syntax tree and add `scope` and `scopeInfo` properties to appropriate nodes.
+
+- ast `Object` - Abstract syntax tree to walk over/mutate
+    - We have developed against [`esprima`][] which matches the [Spidermonkey API][]
+
+[`esprima`]: http://esprima.org/
+[Spidermonkey API]: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API
+
+**Returns:**
+
+We return the same `ast` variable but with the addition of `scope` and `scopeInfo` nodes on `Identifiers` that are variables.
+
+```js
+// `scope` and `scopeInfo` will be defined for all `hello`, `world`, and `moon` references
+function hello(world) {
+  var moon;
+  hello(world, moon);
+}
+```
+
+#### `scope`
+
+#### Unstable
+There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
+
+[create-issue]: https://github.com/twolfson/ecma-variable-scope/issues/new
+
+- `_nearestScope` - Present on every node and points to the closest scope of any type up its parents. This is useful for jumping through `block` scopes until reaching a `lexical` one.
+- `_scopeType` - Stored on initial declarations of identifiers. This is the same as `scopeInfo.type` but needs to be preserved before `scopeInfo` is generated.
 
 ## Examples
 _(Coming soon)_
