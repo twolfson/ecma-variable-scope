@@ -56,6 +56,9 @@
     "scope",
     "variables",
     "variable",
-    "var"
+    "var",
+    "block",
+    "lexical",
+    "with"
   ]
 }

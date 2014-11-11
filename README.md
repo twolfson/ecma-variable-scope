@@ -112,10 +112,15 @@ Object containing information about the variable itself:
     - `unknown` is any time a `with` exists before the containing scope (or lack there of)
     - We provide `exports.SCOPE_INFO_DECLARE.YES`, `exports.SCOPE_INFO_DECLARE.NO`, and `exports.SCOPE_INFO_DECLARE.UNKNOWN` respectively.
 - insideWith `Boolean` - Indicator of whether a variable has a `with` between its declaration and its containing scope
-    - `true` if there is a `with` between the declaration and containing scope
-    - `false` if there is not one
-    - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` and  `exports.SCOPE_INFO_INSIDE_WITH.NO`.
-- toplevel `Boolean` -
+    - `true` if there was a `with`,`false` if there was not one
+    - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` and  `exports.SCOPE_INFO_INSIDE_WITH.NO` respectively.
+- toplevel `Boolean` - Indicator of whether a variable was declared in the `Program` scope or not
+    - `true` if it was, `false` if it was not
+    - We provide `exports.SCOPE_INFO_TPO_LEVEL.YES` and  `exports.SCOPE_INFO_TPO_LEVEL.NO` respectively.
+- type `String` - Reference to the type of scope given to a variable
+    - This can vary from the containing scope (e.g. a `let` is scoped to a `function`; `block` to `lexical`)
+    - This can be `lexical` (e.g. `function`), `block` (e.g. `for` loop), or `undeclared` (not declared in any containing scope)
+    - We provide `exports.SCOPE_INFO_TYPES.LEXICAL`, `exports.SCOPE_INFO_TYPES.BLOCK`, and `exports.SCOPE_INFO_TYPES.UNDECLARED` respectively.
 
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
