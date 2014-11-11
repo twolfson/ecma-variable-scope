@@ -10,15 +10,13 @@ describe('ecma-variable-scope', function () {
   describe.only('marking up an AST for its scopes', function () {
     scriptUtils.interpretFnAst(function () {
       function hello() {
-        function world() {
-          var hai = true;
-        }
+        var world = true;
       }
     });
     before(function grabScope () {
       // {Program} (ast) -> {function} (body[0]) -> {var} (body.body[0])
       //  -> hai (declarations[0].id)
-      this.fn1 = this.ast.body[0];
+      this.fn = this.ast.body[0];
       this.identifier = this.fn.body.body[0].declarations[0].id;
       this.scope = this.identifier.scope;
     });
@@ -37,15 +35,16 @@ describe('ecma-variable-scope', function () {
     });
 
     it('gives a `scope` a `parent`', function () {
-      expect(this.scope).to.have.property('scope');
-      expect(identifier).to.have.property('scopeInfo');
+      expect(this.scope).to.have.property('parent', this.ast.scope);
     });
 
-    it.skip('saves its identifiers', function () {
-
+    it('saves `identifiers` on a `scope`', function () {
+      expect(this.scope).to.have.property('identifiers');
+      expect(this.scope.identifiers).to.have.keys(['world']);
+      expect(this.scope.identifiers.world).to.equal(this.identifier);
     });
 
-    it.skip('saves its child scopes', function () {
+    it.skip('saves child scopes on a `scope`', function () {
 
     });
   });
