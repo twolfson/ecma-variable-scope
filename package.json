@@ -41,7 +41,7 @@
     "grunt-cli": "~0.1.13",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-watch": "~0.4.0",
-    "istanbul": "git://github.com/gotwarlost/istanbul#harmony",
+    "istanbul": "~0.3.2",
     "mocha": "~2.0.1"
   },
   "keywords": [
