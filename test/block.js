@@ -83,14 +83,14 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it('scopes the variable to the `for` statement', function () {
+    it('scopes the variable to the `for in` statement', function () {
       var forInLoop = this.ast.body[1];
       var identifier = forInLoop.left.declarations[0].id;
       expect(identifier.scope.node).to.equal(forInLoop);
     });
   });
 
-  describe.only('marking up an AST with a `for of` loop', function () {
+  describe('marking up an AST with a `for of` loop', function () {
     scriptUtils.interpretStrAst([
       '\'use strict\';',
       'for (let hello of [\'world\']) {',
@@ -104,7 +104,29 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
-    it('scopes the variable to the `for` statement', function () {
+    it('scopes the variable to the `for of` statement', function () {
+      var forInLoop = this.ast.body[1];
+      var identifier = forInLoop.left.declarations[0].id;
+      expect(identifier.scope.node).to.equal(forInLoop);
+    });
+  });
+
+  describe.only('marking up an AST with a `catch` clause', function () {
+    scriptUtils.interpretFnAst(function () {
+      try {
+        // Throw an error
+      } catch (hello) {
+        // Handle error
+      }
+    });
+
+    it('a parameter is considered `block` scoped', function () {
+      // {Program} (ast) -> {try} (body[0]) -> {catch} (handlers[0]) -> hello (param)
+      var identifier = this.ast.body[0].handlers[0].param;
+      expect(identifier.scopeInfo).to.have.property('type', 'block');
+    });
+
+    it.skip('scopes the variable to the `catch` claus', function () {
       var forInLoop = this.ast.body[1];
       var identifier = forInLoop.left.declarations[0].id;
       expect(identifier.scope.node).to.equal(forInLoop);
@@ -134,4 +156,6 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scope.node).to.equal(this.ast);
     });
   });
+
+  // TODO: Test multiple catches and a finally
 });
