@@ -9,17 +9,21 @@ var scriptUtils = require('./utils/script');
 describe('ecma-variable-scope', function () {
   describe.only('marking up an AST for its scopes', function () {
     scriptUtils.interpretFnAst(function () {
-      function hello(world) {
-        var hai = true;
+      function hello() {
+        function world() {
+          var hai = true;
+        }
       }
     });
     before(function grabScope () {
       // {Program} (ast) -> {function} (body[0]) -> {var} (body.body[0])
       //  -> hai (declarations[0].id)
-      this.identifier = this.ast.body[0].body.body[0].declarations[0].id;
+      this.fn1 = this.ast.body[0];
+      this.identifier = this.fn.body.body[0].declarations[0].id;
       this.scope = this.identifier.scope;
     });
     after(function cleanup () {
+      delete this.fn;
       delete this.identifier;
       delete this.scope;
     });
@@ -28,17 +32,12 @@ describe('ecma-variable-scope', function () {
       expect(this.scope).to.have.property('type', 'lexical');
     });
 
-    it.skip('gives a `scope` a `node`', function () {
-      // {Program} (ast) -> {logger.info} (body[1]) -> logger (expression.callee.object)
-      var identifier = this.ast.body[1].expression.callee.object;
-      expect(identifier).to.have.property('scope');
-      expect(identifier).to.have.property('scopeInfo');
+    it('gives a `scope` a `node`', function () {
+      expect(this.scope).to.have.property('node', this.fn);
     });
 
-    it.skip('gives a `scope` a `parent`', function () {
-      // {Program} (ast) -> {logger.info} (body[1]) -> logger (expression.callee.object)
-      var identifier = this.ast.body[1].expression.callee.object;
-      expect(identifier).to.have.property('scope');
+    it('gives a `scope` a `parent`', function () {
+      expect(this.scope).to.have.property('scope');
       expect(identifier).to.have.property('scopeInfo');
     });
 
