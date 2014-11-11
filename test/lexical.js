@@ -64,7 +64,7 @@ describe('ecma-variable-scope', function () {
         // TODO: That needs to have a conditional to break it out to the higher scope
       console.log(identifier.nearestScope);
       // console.log(identifier.scope.node);
-      // expect(identifier.scope.node).to.equal(this.ast.body[0]);
+      expect(identifier.scope.node).to.equal(this.ast.body[0]);
     });
   });
 
