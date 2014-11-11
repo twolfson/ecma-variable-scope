@@ -27,25 +27,42 @@ Install the module with: `npm install ecma-variable-scope`
 
 ```js
 // Gather an AST to analyze
+var esprima = require('esprima');
 var ecmaVariableScope = require('ecma-variable-scope');
+var ast = esprima.parse([
+  'function logger(str) {',
+    'console.log(str);',
+  '}'
+].join('\n'));
 
 // Determine the scope of a variable
+ecmaVariableScope(ast);
+ast.body[0].id;
+/*
+// `logger` variable
+  scopeInfo:
+   { declared: true,
+     topLevel: true,
+     insideWith: false,
+     type: 'lexical' },
+  scope:
+   { type: 'lexical',
+     node: Program,
+     parent: undefined,
+     identifiers: { logger: [Circular] },
+     children: [ [Object] ] } }
+*/
 
-/*{
-  // Resolution of `!with && var || let || const || function || 'arguments' || catch`
-  //   If a `with` is used before a `var`, `let`, `const`, `function`, `arguments,` or `catch`
-  //   then, `exports.DECLARED_UNKNOWN` is returned
-  //   For your sanity, we provide `exports.DECLARED_YES` (true) and `exports.DECLARED_NO` (false)
-  declared: true,
-  topLevel: false,
-  with: false,
-  var: true,
-  let: false,
-  const: false,
-  function: false,
-  'arguments': false,
-  catch: false
-}*/
+ast.body[0].body.body[0].expression.callee.object;
+/*
+// `console` variable
+  scopeInfo:
+   { declared: false,
+     topLevel: true,
+     insideWith: false,
+     type: 'undeclared' },
+  scope: undefined
+*/
 ```
 
 ## Documentation
