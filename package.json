@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "chai": "~1.9.2",
+    "coveralls": "~2.11.2",
     "esprima-fb": "~7001.1.0-dev-harmony-fb",
     "function-to-string": "~0.2.0",
     "grunt": "~0.4.1",
