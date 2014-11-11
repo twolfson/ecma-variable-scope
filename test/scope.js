@@ -95,7 +95,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking an ArrayPattern', function () {
+  describe('marking an ArrayPattern', function () {
     scriptUtils.interpretStrAst([
       'var hello = [\'world\'];',
       'var [world] = hello;'
