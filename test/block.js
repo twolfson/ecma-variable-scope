@@ -111,7 +111,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with a `catch` clause', function () {
+  describe('marking up an AST with a `catch` clause', function () {
     scriptUtils.interpretFnAst(function () {
       try {
         // Throw an error
