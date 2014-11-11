@@ -133,7 +133,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with a comprehension expression', function () {
+  describe('marking up an AST with a comprehension expression', function () {
     scriptUtils.interpretStrAst([
       'var a = [1 for (hello of [\'world\'])];'
     ].join('\n'));
@@ -155,8 +155,7 @@ describe('ecma-variable-scope', function () {
 
 // Edge cases
 describe('ecma-variable-scope', function () {
-  // TODO: Test me
-  describe.skip('marking up an AST with a `let` inside a `function`', function () {
+  describe.only('marking up an AST with a `let` inside a `function`', function () {
     scriptUtils.interpretFnAst(function () {
       (function myFn () {
         'use strict';
@@ -165,14 +164,16 @@ describe('ecma-variable-scope', function () {
     });
 
     it('is considered `block`', function () {
-      // {Program} (ast) -> {let} (body[1]) -> hello (declarations[0].id)
-      var identifier = this.ast.body[1].declarations[0].id;
+      // {Program} (ast) -> {fn invocation} (body[0]) -> {fn} (expression.callee)
+      //  -> {block} (body) -> {let} (body[1]) -> hello (declarations[0].id)
+      var identifier = this.ast.body[0].expression.callee.body.body[1].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('type', 'block');
     });
 
     it('scopes the variable to the `block` statement', function () {
-      var identifier = this.ast.body[1].declarations[0].id;
-      expect(identifier.scope.node).to.equal(this.ast);
+      var blockScope = this.ast.body[0].expression.callee.body;
+      var identifier = blockScope.body[1].declarations[0].id;
+      expect(identifier.scope.node).to.equal(blockScope);
     });
   });
 });
