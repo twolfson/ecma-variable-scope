@@ -26,7 +26,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt jshint && mocha"
+    "test": "grunt jshint && mocha --harmony"
   },
   "dependencies": {
     "ecma-scopes": "~1.1.0",
