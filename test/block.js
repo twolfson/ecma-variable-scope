@@ -69,13 +69,34 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking up an AST with a `for in` loop', function () {
+  describe('marking up an AST with a `for in` loop', function () {
     scriptUtils.interpretFnAst(function () {
       'use strict';
       for (let hello in {world: true}) {
         // Code goes here
       }
     });
+
+    it('a `block` parameter is considered `block` scoped', function () {
+      // {Program} (ast) -> {for} (body[1]) -> {let} (left) -> hello (declarations[0].id)
+      var identifier = this.ast.body[1].left.declarations[0].id;
+      expect(identifier.scopeInfo).to.have.property('type', 'block');
+    });
+
+    it('scopes the variable to the `for` statement', function () {
+      var forInLoop = this.ast.body[1];
+      var identifier = forInLoop.left.declarations[0].id;
+      expect(identifier.scope.node).to.equal(forInLoop);
+    });
+  });
+
+  describe.only('marking up an AST with a `for of` loop', function () {
+    scriptUtils.interpretStrAst([
+      '\'use strict\';',
+      'for (let hello of [\'world\']) {',
+        '// Code goes here',
+      '}'
+    ].join('\n'));
 
     it('a `block` parameter is considered `block` scoped', function () {
       // {Program} (ast) -> {for} (body[1]) -> {let} (left) -> hello (declarations[0].id)
