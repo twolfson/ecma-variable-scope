@@ -35,7 +35,9 @@ describe('ecma-variable-scope', function () {
     });
 
     it('gives a `scope` a `parent`', function () {
-      expect(this.scope).to.have.property('parent', this.ast.scope);
+      var programScope = this.ast.body[0]._nearestScope;
+      expect(programScope).to.not.equal(undefined);
+      expect(this.scope).to.have.property('parent', programScope);
     });
 
     it('saves `identifiers` on a `scope`', function () {
@@ -44,8 +46,12 @@ describe('ecma-variable-scope', function () {
       expect(this.scope.identifiers.world).to.equal(this.identifier);
     });
 
-    it.skip('saves child scopes on a `scope`', function () {
-
+    it('saves child scopes on a `scope`', function () {
+      var programScope = this.ast.body[0]._nearestScope;
+      expect(programScope).to.not.equal(undefined);
+      expect(programScope).to.have.property('children');
+      expect(programScope.children).to.have.length(1);
+      expect(programScope.children[0]).to.equal(this.scope);
     });
   });
 
