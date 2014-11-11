@@ -3,8 +3,7 @@ var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
 
 // Run our tests
-// Identifier edge cases
-// Anything with the `Identifier` that isn't a variable referenc
+// Anything with the `Identifier` that isn't a variable reference
 // https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a call expression', function () {
