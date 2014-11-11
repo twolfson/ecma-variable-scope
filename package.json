@@ -26,7 +26,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "cover": "istanbul cover _mocha",
+    "cover": "node --harmony ./node_modules/.bin/istanbul cover _mocha",
     "test": "grunt jshint && mocha --harmony"
   },
   "dependencies": {
