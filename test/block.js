@@ -155,7 +155,7 @@ describe('ecma-variable-scope', function () {
 
 // Edge cases
 describe('ecma-variable-scope', function () {
-  describe.only('marking up an AST with a `let` inside a `function`', function () {
+  describe('marking up an AST with a `let` inside a `function`', function () {
     scriptUtils.interpretFnAst(function () {
       (function myFn () {
         'use strict';
