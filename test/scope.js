@@ -80,7 +80,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe('marking an object pattern', function () {
+  describe('marking an ObjectPattern', function () {
     scriptUtils.interpretStrAst([
       'var hello = {world: true};',
       'var {world} = hello;'
@@ -95,7 +95,20 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  // TODO: Test ArrayPattern for good measure
+  describe.only('marking an ArrayPattern', function () {
+    scriptUtils.interpretStrAst([
+      'var hello = [\'world\'];',
+      'var [world] = hello;'
+    ].join('\n'));
+
+    it('marks the identifier keys as variables', function () {
+      // {Program} (ast) -> {var} (body[1]) -> {array pattern} (declarations[0].id)
+      //  -> world (elements[0])
+      var identifier = this.ast.body[1].declarations[0].id.elements[0];
+      expect(identifier).to.have.property('scope');
+      expect(identifier).to.have.property('scopeInfo');
+    });
+  });
 });
 
 // Edge cases
