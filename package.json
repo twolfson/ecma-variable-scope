@@ -30,7 +30,8 @@
     "test:test": "mocha --harmony",
     "test:cover": "node --harmony ./node_modules/.bin/istanbul cover _mocha",
     "test:cover-verify": "./node_modules/.bin/istanbul check-coverage --statements 95 --functions 95 --branches 95 --lines 95",
-    "test": "npm run test:lint && npm run test:cover && npm run test:cover-verify"
+    "test": "npm run test:lint && npm run test:cover && npm run test:cover-verify",
+    "travis": "npm run test && cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "ecma-scopes": "~2.0.0",
