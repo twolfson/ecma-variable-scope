@@ -39,8 +39,8 @@ describe('ecma-variable-scope', function () {
     });
 
     it('marks the variable as `unknown`', function () {
-      // {Program} (ast) -> {console.log} (body[0]) -> console {expression.callee.object}
-      var identifier = this.ast.body[0].expression.callee.object;
+      // {Program} (ast) -> {with} (body[1]) -> {console.log} (body.body[0]) -> console {expression.callee.object}
+      var identifier = this.ast.body[1].body.body[0].expression.callee.object;
       expect(identifier.scopeInfo).to.have.property('declared', 'unknown');
     });
   });
