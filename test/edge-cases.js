@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
 
 // Run our tests
+// Identifier edge cases
 describe('ecma-variable-scope', function () {
   describe('marking up an AST with a call expression', function () {
     scriptUtils.interpretFnAst(function () {
@@ -12,10 +13,10 @@ describe('ecma-variable-scope', function () {
       logger.info('hello');
     });
 
-    it('does not mark the `info` property with a `scope`', function () {
-      // {Program} (ast) -> {var} (body[0]) -> hello (declarations[0].id)
-      var identifier = this.ast.body[0].declarations[0].id;
-      expect(identifier.scopeInfo).to.have.property('declared', true);
+    it.only('does not mark the `info` property with a `scope`', function () {
+      // {Program} (ast) -> {logger.info} (body[1]) -> info (expression.callee.property)
+      var identifier = this.ast.body[1].expression.callee.property;
+      expect(identifier).to.not.have.property('scopeInfo');
     });
   });
 });
