@@ -103,7 +103,19 @@ Object containing information about the outermost scope a variable can be access
 It is possible for an `Identifier` to have `scopeInfo` but not `scope`. For example, `console` is defined as a global outside of a script context. We cannot determine if it is defined or not and make the decision to leave it as `undefined`.
 
 #### `scopeInfo`
+Object containing information about the variable itself:
 
+- declared `Boolean|String` - Indicator of whether the variable was declared by any means or if it cannot be resolved
+    - This can be `true`, `false`, or `unknown`
+    - `true` occurs when we know it has a type (e.g. `lexical`, `block`) **and**there has been no `with` between us and the `scope`
+    - `false` is when there is no `with` and the type is `undeclared`
+    - `unknown` is any time a `with` exists before the containing scope (or lack there of)
+    - We provide `exports.SCOPE_INFO_DECLARE.YES`, `exports.SCOPE_INFO_DECLARE.NO`, and `exports.SCOPE_INFO_DECLARE.UNKNOWN` respectively.
+- insideWith `Boolean` - Indicator of whether a variable has a `with` between its declaration and its containing scope
+    - `true` if there is a `with` between the declaration and containing scope
+    - `false` if there is not one
+    - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` and  `exports.SCOPE_INFO_INSIDE_WITH.NO`.
+- toplevel `Boolean` -
 
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
@@ -112,9 +124,6 @@ There are a few extra properties that are thrown in for preparation of `scope` a
 
 - `_nearestScope` - Present on every node and points to the closest scope of any type up its parents. This is useful for jumping through `block` scopes until reaching a `lexical` one.
 - `_scopeType` - Stored on initial declarations of identifiers. This is the same as `scopeInfo.type` but needs to be preserved before `scopeInfo` is generated.
-
-## Examples
-_(Coming soon)_
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
