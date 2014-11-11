@@ -17,6 +17,12 @@ Scope detection is hard, especially when `with` exists. This utility extracts al
 [`esformatter-phonetic`]: https://github.com/twolfson/esformatter-phonetic
 [`esformatter`]: https://github.com/millermedeiros/esformatter
 
+**Features:**
+
+- Support for arrow expressions (e.g. `(hello) => hello.world`)
+- Support for `let` and `const`
+- Detects `with` usage
+
 ## Getting Started
 Install the module with: `npm install ecma-variable-scope`
 
