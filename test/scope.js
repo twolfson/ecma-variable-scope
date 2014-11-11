@@ -7,7 +7,7 @@ var scriptUtils = require('./utils/script');
 //   `top-level.js` (`topLevel`), `declared.js` (`declared`),
 //   `lexical.js`/`block.js` (`type` except for `undeclared`)
 describe('ecma-variable-scope', function () {
-  describe.only('marking up an AST for its scopes', function () {
+  describe('marking up an AST for its scopes', function () {
     scriptUtils.interpretFnAst(function () {
       function hello() {
         var world = true;
@@ -55,7 +55,24 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  // TODO: Test out `undefined` parent
+  describe.only('marking up an AST with a top level scope', function () {
+    scriptUtils.interpretFnAst(function () {
+      var hello = 'world';
+    });
 
-  // TODO: scopeInfo.type = `undeclared` and `scope` === undefined
+    before(function grabScope () {
+      // {Program} (ast) -> {var} (body[0]) -> hello (declarations[0].id)
+      this.identifier = this.ast.body[0].declarations[0].id;
+      this.scope = this.identifier.scope;
+    });
+    after(function cleanup () {
+      delete this.identifier;
+      delete this.scope;
+    });
+
+    it('has an undefined parent for its `scope`', function () {
+      expect(this.scope).to.not.have.property('parent');
+    });
+  });
+    // TODO: scopeInfo.type = `undeclared` and `scope` === undefined
 });
