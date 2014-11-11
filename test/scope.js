@@ -80,7 +80,7 @@ describe('ecma-variable-scope', function () {
     });
   });
 
-  describe.only('marking an object pattern', function () {
+  describe('marking an object pattern', function () {
     scriptUtils.interpretStrAst([
       'var hello = {world: true};',
       'var {world} = hello;'
