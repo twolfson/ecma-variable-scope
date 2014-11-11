@@ -17,8 +17,9 @@ describe.only('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
 
-    it.skip('scopes the variable to the top level', function () {
-
+    it('scopes the variable to the top level', function () {
+      var identifier = this.ast.body[0].declarations[0].id;
+      expect(identifier.scope.node).to.equal(this.ast);
     });
   });
 
@@ -33,8 +34,9 @@ describe.only('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
     });
 
-    it.skip('scopes the variable to the top level', function () {
-
+    it('scopes the variable to the top level', function () {
+      var identifier = this.ast.body[0].declarations[0].id;
+      expect(identifier.scope.node).to.equal(this.ast);
     });
   });
 
