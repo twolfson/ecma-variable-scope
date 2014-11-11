@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var scriptUtils = require('./utils/script');
 
 // Run our tests
-describe.only('ecma-variable-scope', function () {
+describe('ecma-variable-scope', function () {
   describe('marking up an AST with a `var`', function () {
     scriptUtils.interpretFnAst(function () {
       var hello = 'world';
@@ -55,6 +55,28 @@ describe.only('ecma-variable-scope', function () {
     });
 
     it('marks the function parameters as lexically scoped to the function', function () {
+      // {Program} (ast) -> {fn} (body[0]) -> world (params[0])
+      var identifier = this.ast.body[0].params[0];
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      expect(identifier.scope.node).to.equal(this.ast.body[0]);
+    });
+  });
+
+  describe.only('marking up an AST with function expression', function () {
+    scriptUtils.interpretFnAst(function () {
+      [].map(function hello (world) {
+        // Code goes here
+      });
+    });
+
+    it('marks the function name as lexically scoped to the outer scope', function () {
+      // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> hello (id)
+      var identifier = this.ast.body[0].expression.arguments[0].id;
+      expect(identifier.scopeInfo).to.have.property('type', 'lexical');
+      expect(identifier.scope.node).to.equal(this.ast);
+    });
+
+    it.skip('marks the function parameters as lexically scoped to the function', function () {
       // {Program} (ast) -> {fn} (body[0]) -> world (params[0])
       var identifier = this.ast.body[0].params[0];
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
