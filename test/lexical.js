@@ -99,9 +99,9 @@ describe('ecma-variable-scope', function () {
 
   describe('marking up an AST with an arrow expression', function () {
     // DEV: JSHint doesn't like ES6 too much =(
-    scriptUtils.interpretFnAst(function () {
-      [].map(lexical => lexical);
-    });
+    scriptUtils.interpretStrAst([
+      '[].map((arrowParam) => 1);'
+    ].join('\n'));
 
     it('marks the function parameters as lexically scoped to the function', function () {
       // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
