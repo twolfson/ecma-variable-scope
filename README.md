@@ -4,9 +4,6 @@ AST utility to collect scope info for variables
 
 // TODO: When done, update name in `ecma-scopes' README`
 
-// TODO: Strongly consider using a code coverage lib
-  // Especially a critical one like steamshovel
-
 Scope detection is hard, especially when `with` exists. This utility extracts all relevant info for making decisions. This project was built as part of [`esformatter-phonetic`][], a [`esformatter`][] plugin that makes obfuscated variable names more comprehensible.
 
 [`esformatter-phonetic`]: https://github.com/twolfson/esformatter-phonetic
