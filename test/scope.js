@@ -56,7 +56,7 @@ describe('ecma-variable-scope', function () {
       expect(identifier).to.not.have.property('scopeInfo');
     });
 
-    it.only('does not mark the `break` identifier with a `scope`', function () {
+    it('does not mark the `break` identifier with a `scope`', function () {
       // {Program} (ast) -> {labeled statement} (body[0]) -> {for} (body)
       //  -> {if} (body.body[0]) -> {break} (consequent.body[0]) -> loop1 {label}
       var identifier = this.ast.body[0].body.body.body[0].consequent.body[0].label;
@@ -64,9 +64,10 @@ describe('ecma-variable-scope', function () {
       expect(identifier).to.not.have.property('scopeInfo');
     });
 
-    it('does not mark the `continue` identifier with a `scope`', function () {
-      // {Program} (ast) -> {var} (body[0]) -> {logger} (declarations[0].init) -> info (properties[0].key)
-      var identifier = this.ast.body[0].declarations[0].init.properties[0].key;
+    it.only('does not mark the `continue` identifier with a `scope`', function () {
+      // {Program} (ast) -> {labeled statement} (body[0]) -> {for} (body)
+      //  -> {if} (body.body[0]) -> {continue} (alternate.body[0]) -> loop1 {label}
+      var identifier = this.ast.body[0].body.body.body[0].alternate.body[0].label;
       expect(identifier).to.not.have.property('scope');
       expect(identifier).to.not.have.property('scopeInfo');
     });
