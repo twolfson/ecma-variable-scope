@@ -14,6 +14,13 @@ describe('ecma-variable-scope', function () {
       logger.info('hello');
     });
 
+    it('marks the `logger` variable with a `scope`', function () {
+      // {Program} (ast) -> {logger.info} (body[1]) -> logger (expression.callee.object)
+      var identifier = this.ast.body[1].expression.callee.object;
+      expect(identifier).to.have.property('scope');
+      expect(identifier).to.have.property('scopeInfo');
+    });
+
     it('does not mark the `info` property with a `scope`', function () {
       // {Program} (ast) -> {logger.info} (body[1]) -> info (expression.callee.property)
       var identifier = this.ast.body[1].expression.callee.property;
