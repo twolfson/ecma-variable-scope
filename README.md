@@ -1,4 +1,4 @@
-# ecma-variable-scope [![Build status](https://travis-ci.org/twolfson/ecma-variable-scope.png?branch=master)](https://travis-ci.org/twolfson/ecma-variable-scope) [![Coverage Status](https://img.shields.io/coveralls/twolfson/ecma-variable-scope.svg)](https://coveralls.io/r/twolfson/ecma-variable-scope)
+# ecma-variable-scope [![Build status](https://travis-ci.org/twolfson/ecma-variable-scope.png?branch=master)](https://travis-ci.org/twolfson/ecma-variable-scope) [![Coverage Status](https://img.shields.io/coveralls/twolfson/ecma-variable-scope.svg)](https://coveralls.io/r/twolfson/ecma-variable-scope?branch=master)
 
 AST utility to collect scope info for variables
 
