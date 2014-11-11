@@ -4,11 +4,11 @@ AST utility to collect scope info for variables
 
 // TODO: When done, update name in `ecma-scopes' README`
 
-// TODO: Test declared/undeclared
 // TODO: Strongly consider using a code coverage lib
   // Especially a critical one like steamshovel
 // TODO: Test `nearestScope`, `declared`, and anything else (e.g. `scope.parent, children`)
   // Although, this locks in our API when all we wanted was `scope` on the identifiers
+  // TODO: Mark anything except for `scope` on a `node` with an `_` prefix
 
 // TODO: Verify call expressions are not captured by identifier
 // TODO: Verify labels are not captured by identifier
