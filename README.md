@@ -92,10 +92,10 @@ Object containing information about the outermost scope a variable can be access
     - This can be `lexical` or `block`. When we traverse `scope.parent`, we can run into `with` but this is not directly found from `node.scope`.
     - We make these values available via `exports.SCOPE_TYPES.LEXICAL`, `exports.SCOPE_TYPES.WITH`, and`exports.SCOPE_TYPES.BLOCK`.
 - node `Object<Node>` - AST node that corresponds to the top of scope
-    - For example in `function a() { var b; }`, `b.scope.node === a`
+    - For example in `function a() { var b; }`, we have `b.scope.node === a`
 - parent `Object<Scope>|undefined` - Next scope containing the current `scope`. This can be any other type (e.g. `lexical`, `block`, `with`).
 - identifiers `Object` - Map from identifier name to `Identifier` reference of variables declared within this scope
-    - For example in `function a() { var b; }`, `a.scope.identifiers === {b: b's Identifier}`
+    - For example in `function a() { var b; }`, we have `a.scope.identifiers === {b: b's Identifier}`
     - This will not contain identifiers within child scopes
 - children `Scope[]` - Array of child scopes contained by this scope
     - For example in `function a() { }`, `Program's scope` will contain `a.scope`
