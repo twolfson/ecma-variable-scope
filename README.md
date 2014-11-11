@@ -20,11 +20,11 @@ Scope detection is hard, especially when `with` exists. This utility extracts al
 
 **Features:**
 
-- Support for arrow expressions (e.g. `(hello) => hello.world`)
+- Detect `with` usage
+- Does not mark `labels`
 - Support for `let` and `const`
-- Detects `with` usage
-- Does not mark `labels` or `properties`
-- Destructured variables (e.g. `var {hello, world} = obj;`)
+- Support for destructured variables (e.g. `var {hello, world} = obj;`)
+- Support for arrow expressions (e.g. `(hello) => hello.world`)
 
 ## Getting Started
 Install the module with: `npm install ecma-variable-scope`
