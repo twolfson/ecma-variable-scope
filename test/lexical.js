@@ -84,7 +84,6 @@ describe('ecma-variable-scope', function () {
       // {Program} (ast) -> {[]} (body[0]) -> {fn} (expression.arguments[0]) -> world (params[0])
       var fn = this.ast.body[0].expression.arguments[0];
       var identifier = fn.params[0];
-      console.log(fn);
       expect(identifier.scopeInfo).to.have.property('type', 'lexical');
       expect(identifier.scope.node).to.equal(fn);
     });
