@@ -24,6 +24,7 @@ Scope detection is hard, especially when `with` exists. This utility extracts al
 - Support for `let` and `const`
 - Detects `with` usage
 - Does not mark `labels` or `properties`
+- Destructured variables (e.g. `var {hello, world} = obj;`)
 
 ## Getting Started
 Install the module with: `npm install ecma-variable-scope`
