@@ -15,6 +15,7 @@ describe('ecma-variable-scope', function () {
 
     it.only('does not mark the `info` property with a `scope`', function () {
       // {Program} (ast) -> {logger.info} (body[1]) -> info (expression.callee.property)
+      console.log(this.ast.body[1].expression);
       var identifier = this.ast.body[1].expression.callee.property;
       expect(identifier).to.not.have.property('scopeInfo');
     });
