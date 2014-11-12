@@ -126,6 +126,8 @@ Object containing information about the variable itself:
     - For example in `var hello; var obj = {}; with (obj) { hello; } }`, we have `hello1.usedInAWith === true` and `obj1.usedInAWith === false`.
     - We provide `exports.SCOPE_INFO_USED_IN_A_WITH.YES` (`true)` and  `exports.SCOPE_INFO_USED_IN_A_WITH.NO` (`false`).
 
+> If you would like to determine if a variable can be renamed without causing other problems, use `usedInAWith` (`false`), `topLevel` (`false`), and `type` (`lexical`/`block`).
+
 #### Unstable
 There are a few extra properties that are thrown in for preparation of `scope` and `scopeInfo`. They could be replaced with a better algorithm but are there if you need them. If you are using them, please [let us know via an issue][create-issue].
 
