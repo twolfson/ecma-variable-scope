@@ -27,6 +27,12 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('insideWith', true);
     });
 
+    it.only('marks the `with` object as not used in a `with`', function () {
+      // {Program} (ast) -> {with} (body[2]) -> obj (object)
+      var identifier = this.ast.body[2].object;
+      expect(identifier.scopeInfo).to.have.property('insideWith', false);
+    });
+
     it('marks the outer variable with a `usedInAWith`', function () {
       var identifier = this.ast.body[0].declarations[0].id;
       expect(identifier.scopeInfo).to.have.property('usedInAWith', true);
@@ -37,7 +43,7 @@ describe('ecma-variable-scope', function () {
       expect(identifier.scopeInfo).to.have.property('usedInAWith', true);
     });
 
-    it.only('marks the `with` object without a `usedInAWith`', function () {
+    it('marks the `with` object without a `usedInAWith`', function () {
       // {Program} (ast) -> {with} (body[2]) -> obj (object)
       var identifier = this.ast.body[2].object;
       expect(identifier.scopeInfo).to.have.property('usedInAWith', false);    });
