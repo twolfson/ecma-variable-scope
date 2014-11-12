@@ -108,13 +108,6 @@ It is possible for an `Identifier` to have `scopeInfo` but not `scope`. For exam
 #### `scopeInfo`
 Object containing information about the variable itself:
 
-- declared `Boolean|String` - Indicator of whether the variable was declared by any means or if it cannot be resolved
-    - This can be `true`, `false`, or `unknown`
-    - `true` occurs when we know it has a type (e.g. `lexical`, `block`) **and** there has been no `with` between us and the `scope`
-    - `false` is when there is no `with` and the type is `undeclared`
-    - `unknown` is any time a `with` exists before the containing scope (or lack there of)
-    - For example in `function a() { b(); }`, we have `a.scopeInfo.declared === true` and `b.scopeInfo.declared === false`.
-    - We provide `exports.SCOPE_INFO_DECLARED.YES` (`true`), `exports.SCOPE_INFO_DECLARED.NO` (`false`), and `exports.SCOPE_INFO_DECLARED.UNKNOWN` (`'unknown'`).
 - insideWith `Boolean` - Indicator of whether a variable has a `with` between its declaration and its containing scope
     - `true` if there was a `with`,`false` if there was not one
     - For example in `function a() { with (window) { document(); } }`, we have `a.insideWith === false` and `document.insideWith === true`.
