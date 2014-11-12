@@ -119,6 +119,10 @@ Object containing information about the variable itself:
     - `true` if there was a `with`,`false` if there was not one
     - For example in `function a() { with (window) { document(); } }`, we have `a.insideWith === false` and `document.insideWith === true`.
     - We provide `exports.SCOPE_INFO_INSIDE_WITH.YES` (`true)` and  `exports.SCOPE_INFO_INSIDE_WITH.NO` (`false`).
+- usedInAWith `Boolean` - Indicator of whether a variable has ever been referenced inside a `with` in its entire scope
+    - `true` if it has been, `false` if it has not
+    - For example in `var hello; var obj = {}; with (obj) { hello; } }`, we have `hello1.usedInAWith === true` and `obj1.usedInAWith === false`.
+    - We provide `exports.SCOPE_INFO_USED_IN_A_WITH.YES` (`true)` and  `exports.SCOPE_INFO_USED_IN_A_WITH.NO` (`false`).
 - toplevel `Boolean` - Indicator of whether a variable was declared in the `Program` scope or not
     - `true` if it was, `false` if it was not
     - For example in `function a() { var b; }`, we have `a.scopeInfo.topLevel === true` and `b.scopeInfo.topLevel === false`.
