@@ -40,8 +40,7 @@ ast.body[0].id;
      identifiers: { logger: [Circular] },
      children: [ [Object] ] },
   scopeInfo:
-   { declared: true,
-     insideWith: false,
+   { insideWith: false,
      topLevel: true,
      type: 'lexical',
      usedInAWith: false }
@@ -52,8 +51,7 @@ ast.body[0].body.body[0].expression.callee.object;
 // `console` variable
   scope: undefined,
   scopeInfo:
-   { declared: false,
-     insideWith: false,
+   { insideWith: false,
      topLevel: true,
      type: 'undeclared',
      usedInAWith: false }
