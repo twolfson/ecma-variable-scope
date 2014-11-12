@@ -42,9 +42,9 @@ ast.body[0].id;
   scopeInfo:
    { declared: true,
      insideWith: false,
-     usedInAWith: false,
      topLevel: true,
-     type: 'lexical' }
+     type: 'lexical',
+     usedInAWith: false }
 */
 
 ast.body[0].body.body[0].expression.callee.object;
@@ -54,9 +54,9 @@ ast.body[0].body.body[0].expression.callee.object;
   scopeInfo:
    { declared: false,
      insideWith: false,
-     usedInAWith: false,
      topLevel: true,
-     type: 'undeclared' }
+     type: 'undeclared',
+     usedInAWith: false }
 */
 ```
 
