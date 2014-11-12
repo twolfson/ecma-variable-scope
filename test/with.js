@@ -44,7 +44,6 @@ describe('ecma-variable-scope', function () {
     });
 
     it('marks the `with` object without a `usedInAWith`', function () {
-      // {Program} (ast) -> {with} (body[2]) -> obj (object)
       var identifier = this.ast.body[2].object;
       expect(identifier.scopeInfo).to.have.property('usedInAWith', false);    });
   });
