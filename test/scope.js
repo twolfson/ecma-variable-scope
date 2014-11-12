@@ -4,8 +4,7 @@ var scriptUtils = require('./utils/script');
 
 // Run our tests
 // DEV: `scopeInfo` is distributed across `with.js` (`insideWith`),
-//   `top-level.js` (`topLevel`), `declared.js` (`declared`),
-//   `lexical.js`/`block.js` (`type` except for `undeclared`)
+//   `top-level.js` (`topLevel`), `lexical.js`/`block.js` (`type` except for `undeclared`)
 describe('ecma-variable-scope', function () {
   describe('marking up an AST for its scopes', function () {
     scriptUtils.interpretFnAst(function () {
