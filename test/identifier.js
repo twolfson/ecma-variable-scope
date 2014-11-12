@@ -113,7 +113,7 @@ describe('ecma-variable-scope', function () {
 
 // Edge cases
 describe('ecma-variable-scope', function () {
-  describe.only('marking up an AST with a variable based property', function () {
+  describe('marking up an AST with a variable based property', function () {
     scriptUtils.interpretFnAst(function () {
       var obj = {};
       var hello = 'world';
