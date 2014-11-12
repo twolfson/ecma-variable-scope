@@ -26,5 +26,20 @@ describe('ecma-variable-scope', function () {
       var identifier = this.ast.body[2].body.body[0].expression['arguments'][0];
       expect(identifier.scopeInfo).to.have.property('insideWith', true);
     });
+
+    it('marks the outer variable with a `usedInAWith`', function () {
+      var identifier = this.ast.body[0].declarations[0].id;
+      expect(identifier.scopeInfo).to.have.property('usedInAWith', true);
+    });
+
+    it('marks the inner `with` variable with a `usedInAWith`', function () {
+      var identifier = this.ast.body[2].body.body[0].expression['arguments'][0];
+      expect(identifier.scopeInfo).to.have.property('usedInAWith', true);
+    });
+
+    it.only('marks the `with` object without a `usedInAWith`', function () {
+      // {Program} (ast) -> {with} (body[2]) -> obj (object)
+      var identifier = this.ast.body[2].object;
+      expect(identifier.scopeInfo).to.have.property('usedInAWith', false);    });
   });
 });
