@@ -1,7 +1,7 @@
 {
   "name": "ecma-variable-scope",
   "description": "AST utility to collect scope info for variables",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "homepage": "https://github.com/twolfson/ecma-variable-scope",
   "author": {
     "name": "Todd Wolfson",
