@@ -33,28 +33,30 @@ ecmaVariableScope(ast);
 ast.body[0].id;
 /*
 // `logger` variable
-  scopeInfo:
-   { declared: true,
-     topLevel: true,
-     insideWith: false,
-     type: 'lexical' },
   scope:
    { type: 'lexical',
      node: Program,
      parent: undefined,
      identifiers: { logger: [Circular] },
-     children: [ [Object] ] } }
+     children: [ [Object] ] },
+  scopeInfo:
+   { declared: true,
+     insideWith: false,
+     usedInAWith: false,
+     topLevel: true,
+     type: 'lexical' }
 */
 
 ast.body[0].body.body[0].expression.callee.object;
 /*
 // `console` variable
+  scope: undefined,
   scopeInfo:
    { declared: false,
-     topLevel: true,
      insideWith: false,
-     type: 'undeclared' },
-  scope: undefined
+     usedInAWith: false,
+     topLevel: true,
+     type: 'undeclared' }
 */
 ```
 
