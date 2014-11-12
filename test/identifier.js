@@ -113,6 +113,21 @@ describe('ecma-variable-scope', function () {
 
 // Edge cases
 describe('ecma-variable-scope', function () {
+  describe.only('marking up an AST with a variable based property', function () {
+    scriptUtils.interpretFnAst(function () {
+      var obj = {};
+      var hello = 'world';
+      obj[hello] = true;
+    });
+
+    it('adds a scope to the variable', function () {
+      // {Program} (ast) -> {obj[]=} (body[2]) -> {obj[hello]} (expression.left) -> hello (property)
+      var identifier = this.ast.body[2].expression.left.property;
+      expect(identifier).to.have.property('scope');
+      expect(identifier).to.have.property('scopeInfo');
+    });
+  });
+
   describe('marking up an AST with an ES5 get/set Property', function () {
     scriptUtils.interpretFnAst(function () {
       var logger = {
